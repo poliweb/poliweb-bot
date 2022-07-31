@@ -20,15 +20,15 @@ bot.command('start', (ctx) => {
 bot.command('help', (ctx) => {
     return ctx.reply('Это help')
 })
-bot.command('portfolio', (ctx) => {
-    return ctx.reply('Это Portfolio')
+bot.command('contact', (ctx) => {
+    return ctx.reply('Это Контакт')
 })
 bot.command('about', (ctx) => {
     return ctx.reply('Это About')
 })
 
 
-bot.command('albom', (ctx) => {
+bot.command('portfolio', (ctx) => {
     return [
         ctx.replyWithMarkdown(`
 *Это моё портфолио*
