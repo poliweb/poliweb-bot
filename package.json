@@ -1,0 +1,23 @@
+{
+  "name": "poliweb-bot",
+  "version": "1.0.0",
+  "description": "PoliWeb bot for Telegram",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poliweb/poliweb-bot.git"
+  },
+  "author": "PoliWeb developer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/poliweb/poliweb-bot/issues"
+  },
+  "homepage": "https://github.com/poliweb/poliweb-bot#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "telegraf": "^4.8.6"
+  }
+}
