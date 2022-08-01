@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Telegraf } = require('telegraf')
+const { Telegraf, Markup, Extra } = require('telegraf')
 
 
 
@@ -14,21 +14,64 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 /**
  * Commands for bot
  */
-bot.command('start', (ctx) => {
-    return ctx.replyWithHTML('Это старт')
-  })
+
+
+// console.log(Markup.inlineKeyboard)
+// console.log(Telegraf)
+
+/**
+ * Command Start
+ */
+
+ bot.command('start', (ctx) => {
+    return [
+        ctx.replyWithHTML(`
+<b>✋ Привет!</b>
+<i>Жми на меню возле строки для вода текста и получи информацию о PoliWeb Developer</i>
+
+<i>Или воспользуйся быстрыми командами для общения с чат-ботом</i>
+
+| Страница старта - /start
+| Портфолио - /portfolio
+| Кто Я - /about
+| Контакты - /contact
+| Помощь - /help
+
+<b>Мне нравится</b> следить за быстрым развитием <b>ИТ-технологий</b>, оставаться в курсе событий и каждый день улучшать свои профессиональные навыки веб-разработки.
+
+<b>Фрагмент кода на JS для этого чат-бота</b>
+Моя философия  - <i>обучение на протяжении всей жизни</i>
+<code>
 bot.command('help', (ctx) => {
     return ctx.reply('Это help')
 })
+</code>
+    `),
+    ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659345878/PoliWebStartUpScvear_ax3px5.webp'}),
+]
+})
+
+/**
+ * Command Help
+*/
+bot.command('help', (ctx) => {
+    return [
+        ctx.reply('Это help'),
+
+    ]
+})
 bot.command('contact', (ctx) => {
-    return ctx.reply('Это Контакт')
+    return ctx.reply('Это contact')
 })
 bot.command('about', (ctx) => {
     return ctx.reply('Это About')
 })
 
-
+/**
+ * Command Portfolio
+ */
 bot.command('portfolio', (ctx) => {
+
     return [
         ctx.replyWithMarkdown(`
 *Это моё портфолио*
@@ -40,34 +83,19 @@ bot.command('portfolio', (ctx) => {
 
 `),
         ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640408444/HadeBaner_hikeag.webp'}),
-        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,g_center,w_1000/v1639997472/screnshot1_woginx.webp'})
+        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,g_center,w_1000/v1639997472/screnshot1_woginx.webp'}, Markup.keyboard([['Альбом 1', 'кнопка 2'], ['кнопка 3', 'кнопка 4']]).oneTime().resize()),
+
     ]
 })
 
-bot.command('html', (ctx) => {
-    return ctx.replyWithHTML(`
-    <b>bold</b>, <strong>bold</strong>
-    <i>italic</i>, <em>italic</em>
-    <u>underline</u>, <ins>underline</ins>
-    <s>strikethrough</s>, <strike>strikethrough</strike>, <del>strikethrough</del>
-    <span class="tg-spoiler">spoiler</span>, <tg-spoiler>spoiler</tg-spoiler>
-    <b>bold <i>italic bold <s>italic bold strikethrough <span class="tg-spoiler">italic bold strikethrough spoiler</span></s> <u>underline italic bold</u></i> bold</b>
-    <a href="http://www.example.com/">inline URL</a>
-    <a href="tg://user?id=123456789">inline mention of a user</a>
-    <code>inline fixed-width code</code>
-    <pre>pre-formatted fixed-width code block</pre>
-    <pre><code class="language-python">pre-formatted fixed-width code block written in the Python programming language</code></pre>
-    <pre>/help</pre>
-    <b>Фрагмент кода на JS для этого чат-бота</b>
-    <i>Я люблю писать код и узнавать новинки в IT индустрии</i>
-    <a href="tg://user?id=1234567890">Моя философия  - <i>обучение на протяжении всей жизни</i></a>
-    <code>bot.command('start', (ctx) => {return ctx.replyWithHTML('Это старт')})</code>
-    <pre><code class="language-js">
-    bot.command('start', (ctx) => {
-        return ctx.replyWithHTML('Это старт')
-      })
-    </code></pre>
-    `)
+/**
+ * /FotoNext1
+ */
+bot.hears('Альбом 1', (ctx) => {
+    return  [
+        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659335486/PoliWebStartUp_vugrpm.webp'}),
+        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640060314/poliweb-dev-to_tp9bpw.webp'})
+    ]
 })
 
 
