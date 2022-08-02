@@ -8,13 +8,12 @@ const { Telegraf, Markup, Extra } = require('telegraf')
  */
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-
+// bot.use(Telegraf.log())
 
 
 /**
  * Commands for bot
  */
-
 
 // console.log(Markup.inlineKeyboard)
 // console.log(Telegraf)
@@ -70,10 +69,8 @@ bot.command('about', (ctx) => {
 /**
  * Command Portfolio
  */
-bot.command('portfolio', (ctx) => {
-
-    return [
-        ctx.replyWithMarkdown(`
+ bot.command('portfolio', async (ctx) => {
+    await ctx.replyWithMarkdown(`
 *Это моё портфолио*
 ✋ [PoliWeb on GitHub](https://github.com/poliweb)
 
@@ -82,20 +79,105 @@ bot.command('portfolio', (ctx) => {
 Получите подробную информацию о разрабочике этого чат-бота
 
 `),
-        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640408444/HadeBaner_hikeag.webp'}),
-        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,g_center,w_1000/v1639997472/screnshot1_woginx.webp'}, Markup.keyboard([['Альбом 1', 'кнопка 2'], ['кнопка 3', 'кнопка 4']]).oneTime().resize()),
-
-    ]
+    await ctx.replyWithMediaGroup([
+        {
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640408444/HadeBaner_hikeag.webp' },
+            caption: 'Piped from URL 1',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,g_center,w_1000/v1639997472/screnshot1_woginx.webp' },
+            caption: 'Piped from URL 2',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640060314/poliweb-dev-to_tp9bpw.webp' },
+            caption: 'Piped from URL 3',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1639997474/screnshot2_axudbj.webp' },
+            caption: 'Piped from URL 4',
+            type: 'photo'
+        }
+    ]),
+    await ctx.reply('Это <b>Моё</b> супер портфолио!',
+        {   parse_mode: 'HTML',
+            ...Markup.inlineKeyboard([
+                Markup.button.callback('Альбом', 'Albom1'),
+                Markup.button.callback('Альбом 2', 'Albom2')
+            ])
+        }
+        )
 })
 
+
 /**
- * /FotoNext1
+ * Action
  */
-bot.hears('Альбом 1', (ctx) => {
-    return  [
-        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659335486/PoliWebStartUp_vugrpm.webp'}),
-        ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640060314/poliweb-dev-to_tp9bpw.webp'})
-    ]
+
+//  Albom 1
+bot.action('Albom1', async(ctx) => {
+    await ctx.replyWithMediaGroup([
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+    ]),
+    await ctx.reply(
+        'Просмотри Альбом 2',
+        Markup.inlineKeyboard([
+            Markup.button.callback('Альбом 2', 'Albom2')
+        ])
+    )
+})
+
+//Albom 2
+bot.action('Albom2', async (ctx) => {
+    await ctx.replyWithMediaGroup([
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+        {
+            media: { url: 'https://picsum.photos/300/500/?random' },
+            caption: 'Piped from URL',
+            type: 'photo'
+        },
+    ]),
+    await ctx.reply(
+        'Просмотри Альбом 1',
+        Markup.inlineKeyboard([
+            Markup.button.callback('Альбом 1', 'Albom1')
+        ])
+    )
 })
 
 
@@ -109,3 +191,8 @@ bot.launch().then(() => {
 }).catch((err) => {
     console.log('Опс!!! Ошибка!!! ', err)
 })
+
+
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
