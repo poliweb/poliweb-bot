@@ -22,31 +22,34 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
  * Command Start
  */
 
- bot.command('start', (ctx) => {
+ bot.command('start', async (ctx) => {
     return [
-        ctx.replyWithHTML(`
+        await ctx.replyWithHTML(`
 <b>✋ Привет!</b>
 <i>Жми на меню возле строки для вода текста и получи информацию о PoliWeb Developer</i>
 
 <i>Или воспользуйся быстрыми командами для общения с чат-ботом</i>
 
-| Страница старта - /start
-| Портфолио - /portfolio
-| Кто Я - /about
-| Контакты - /contact
-| Помощь - /help
+| ⭐ | Страница старта - /start
+| 📸 | Портфолио - /portfolio
+| 🎅 | Кто Я - /about
+| 📩 | Контакты - /contact
+| ❓ | Помощь - /help
 
 <b>Мне нравится</b> следить за быстрым развитием <b>ИТ-технологий</b>, оставаться в курсе событий и каждый день улучшать свои профессиональные навыки веб-разработки.
 
 <b>Фрагмент кода на JS для этого чат-бота</b>
 Моя философия  - <i>обучение на протяжении всей жизни</i>
 <code>
-bot.command('help', (ctx) => {
-    return ctx.reply('Это help')
+bot.command('start', (ctx) => {
+    return [
+        ctx.replyWithHTML('✋ Привет!')
+    ]
 })
 </code>
     `),
-    ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659345878/PoliWebStartUpScvear_ax3px5.webp'}),
+    await ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659345878/PoliWebStartUpScvear_ax3px5.webp'}, 
+    {caption: 'Логотип PoliWeb и илюстрация SVG - формат'}),
 ]
 })
 
@@ -66,46 +69,50 @@ bot.command('about', (ctx) => {
     return ctx.reply('Это About')
 })
 
+
 /**
  * Command Portfolio
  */
  bot.command('portfolio', async (ctx) => {
     await ctx.replyWithMarkdown(`
-*Это моё портфолио*
-✋ [PoliWeb on GitHub](https://github.com/poliweb)
+*📸  Это моё портфолио*
 
-Посетите страницу разрабочика на GitHub.
+В портфолио подобраны графические фрагменты сайтов.
+
+_Посетите страницу разрабочика на GitHub
 Вы там найдёте много интересного и полезного.
-Получите подробную информацию о разрабочике этого чат-бота
+Получите подробную информацию о разработчике этого чат-бота._
+
+✋ [PoliWeb on GitHub](https://github.com/poliweb)
 
 `),
     await ctx.replyWithMediaGroup([
         {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640408444/HadeBaner_hikeag.webp' },
-            caption: 'Piped from URL 1',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491161/Portfolio/slade_7_hfdov0.webp' },
+            caption: 'Слайд 1',
             type: 'photo'
         },
         {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,g_center,w_1000/v1639997472/screnshot1_woginx.webp' },
-            caption: 'Piped from URL 2',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_5_t8yznw.webp' },
+            caption: 'Слайд 2',
             type: 'photo'
         },
         {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1640060314/poliweb-dev-to_tp9bpw.webp' },
-            caption: 'Piped from URL 3',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491298/Portfolio/slade_8_zjghsg.webp' },
+            caption: 'Слайд 3',
             type: 'photo'
         },
         {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1639997474/screnshot2_axudbj.webp' },
-            caption: 'Piped from URL 4',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_6_n8yjbh.webp' },
+            caption: 'Слайд 4',
             type: 'photo'
         }
     ]),
-    await ctx.reply('Это <b>Моё</b> супер портфолио!',
+    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные Альбом 1 и Альбом 2',
         {   parse_mode: 'HTML',
             ...Markup.inlineKeyboard([
-                Markup.button.callback('Альбом', 'Albom1'),
-                Markup.button.callback('Альбом 2', 'Albom2')
+                Markup.button.callback('Альбом 1', 'Albom_1'),
+                Markup.button.callback('Альбом 2', 'Albom_2')
             ])
         }
         )
@@ -117,65 +124,66 @@ bot.command('about', (ctx) => {
  */
 
 //  Albom 1
-bot.action('Albom1', async(ctx) => {
+bot.action('Albom_1', async(ctx) => {
     await ctx.replyWithMediaGroup([
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487339/Portfolio/mars_3_pydzo2.webp' },
+            caption: 'My Mars Expedition 1',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486719/Portfolio/mars_1_du0jzm.webp' },
+            caption: 'My Mars Expedition 2',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486716/Portfolio/mars_2_de3qea.webp' },
+            caption: 'My Mars Expedition 3',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487342/Portfolio/mars_4_koumbw.webp' },
+            caption: 'My Mars Expedition 4',
             type: 'photo'
         },
     ]),
     await ctx.reply(
         'Просмотри Альбом 2',
         Markup.inlineKeyboard([
-            Markup.button.callback('Альбом 2', 'Albom2')
+            Markup.button.callback('Альбом 2', 'Albom_2')
         ])
     )
 })
 
 //Albom 2
-bot.action('Albom2', async (ctx) => {
+bot.action('Albom_2', async (ctx) => {
+    await ctx.replyWithMarkdown(`Альбом *Протатип сайта*`)
     await ctx.replyWithMediaGroup([
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488383/Portfolio/site_1_rfkea6.webp' },
+            caption: 'Протатип сайт лендинг',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488713/Portfolio/site_2_xmcmi2.webp' },
+            caption: 'Протатип сайт лендинг 2',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490041/Portfolio/site_3_spby9b.webp' },
+            caption: 'Протатип сайт Модели 1',
             type: 'photo'
         },
         {
-            media: { url: 'https://picsum.photos/300/500/?random' },
-            caption: 'Piped from URL',
+            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490044/Portfolio/site_7_kbyzdd.webp' },
+            caption: 'Протатип сайт Модели 2',
             type: 'photo'
         },
     ]),
     await ctx.reply(
         'Просмотри Альбом 1',
         Markup.inlineKeyboard([
-            Markup.button.callback('Альбом 1', 'Albom1')
+            Markup.button.callback('Альбом 1', 'Albom_1')
         ])
     )
 })
