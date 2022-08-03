@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Telegraf, Markup, Extra } = require('telegraf')
+const { Telegraf, Markup } = require('telegraf')
 
 
 
@@ -188,6 +188,19 @@ bot.action('Albom_2', async (ctx) => {
     )
 })
 
+
+/**
+ * Test Code
+ */
+//  bot.command('pyramid', (ctx) => {
+//     return ctx.reply(
+//       'Keyboard wrap',
+//       Markup.keyboard(['one', 'two', 'three', 'four', 'five', 'six', 'Albom_1'], {
+//         wrap: (btn, index, currentRow) => currentRow.length >= (index + 1) / 3
+//       })
+//     )
+//   })
+  
 
 /**
  * Start bot
