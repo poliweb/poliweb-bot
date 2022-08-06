@@ -146,11 +146,11 @@ _Вы там найдёте много интересного и полезно�
             type: 'photo'
         }
     ]),
-    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные Альбом 1 и Альбом 2',
+    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
         {   parse_mode: 'HTML',
             ...Markup.inlineKeyboard([
-                Markup.button.callback('Альбом 1', 'Albom_1'),
-                Markup.button.callback('Альбом 2', 'Albom_2')
+                [Markup.button.callback('Альбом 1', 'Albom_1'), Markup.button.callback('Альбом 2', 'Albom_2')],
+                [Markup.button.callback('Альбом 3', 'Albom_3')]
             ])
         }
         )
@@ -162,72 +162,104 @@ _Вы там найдёте много интересного и полезно�
  */
 
 //  Albom 1
-bot.action('Albom_1', async(ctx) => {
-    await ctx.replyWithMarkdown(`
+bot.action('Albom_1', async (ctx) => {
+    try {
+        await ctx.replyWithMarkdown(`
 Альбом 1 *Слайдер для сайта*
 _Демо сайта_ - [MY MARS EXPEDITION](https://mymarsexpedition.netlify.app)
-`)
-    await ctx.replyWithMediaGroup([
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487339/Portfolio/mars_3_pydzo2.webp' },
-            caption: 'My Mars Expedition 1',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486719/Portfolio/mars_1_du0jzm.webp' },
-            caption: 'My Mars Expedition 2',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486716/Portfolio/mars_2_de3qea.webp' },
-            caption: 'My Mars Expedition 3',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487342/Portfolio/mars_4_koumbw.webp' },
-            caption: 'My Mars Expedition 4',
-            type: 'photo'
-        },
-    ]),
-    await ctx.replyWithMarkdown(
-        'Просмотри *Альбом 2*',
-        Markup.inlineKeyboard([
-            Markup.button.callback('Альбом 2', 'Albom_2')
-        ])
-    )
+        `)
+        await ctx.replyWithMediaGroup([{
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487339/Portfolio/mars_3_pydzo2.webp'
+                    },
+                    caption: 'My Mars Expedition 1',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486719/Portfolio/mars_1_du0jzm.webp'
+                    },
+                    caption: 'My Mars Expedition 2',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659486716/Portfolio/mars_2_de3qea.webp'
+                    },
+                    caption: 'My Mars Expedition 3',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487342/Portfolio/mars_4_koumbw.webp'
+                    },
+                    caption: 'My Mars Expedition 4',
+                    type: 'photo'
+                },
+            ]),
+            await ctx.replyWithMarkdown(
+                'Просмотри ещё *Альбомы*',
+                Markup.inlineKeyboard([
+                    [Markup.button.callback('Альбом 2', 'Albom_2'), Markup.button.callback('Альбом 3', 'Albom_3')]
+                ])
+            )
+    } catch (e) {
+        console.error(e)
+    }
 })
 
 //Albom 2
 bot.action('Albom_2', async (ctx) => {
-    await ctx.replyWithMarkdown(`Альбом 2 *Протатип сайта*`)
-    await ctx.replyWithMediaGroup([
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488383/Portfolio/site_1_rfkea6.webp' },
-            caption: 'Протатип сайт лендинг',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488713/Portfolio/site_2_xmcmi2.webp' },
-            caption: 'Протатип сайт лендинг 2',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490041/Portfolio/site_3_spby9b.webp' },
-            caption: 'Протатип сайт Модели 1',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490044/Portfolio/site_7_kbyzdd.webp' },
-            caption: 'Протатип сайт Модели 2',
-            type: 'photo'
-        },
-    ]),
-    await ctx.replyWithMarkdown(
-        'Просмотри *Альбом 1*',
-        Markup.inlineKeyboard([
-            Markup.button.callback('Альбом 1', 'Albom_1')
-        ])
-    )
+    try {
+        await ctx.replyWithMarkdown(`Альбом 2 *Протатип сайта*`)
+        await ctx.replyWithMediaGroup([{
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488383/Portfolio/site_1_rfkea6.webp'
+                    },
+                    caption: 'Протатип сайт лендинг',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659488713/Portfolio/site_2_xmcmi2.webp'
+                    },
+                    caption: 'Протатип сайт лендинг 2',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490041/Portfolio/site_3_spby9b.webp'
+                    },
+                    caption: 'Протатип сайт Модели 1',
+                    type: 'photo'
+                },
+                {
+                    media: {
+                        url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659490044/Portfolio/site_7_kbyzdd.webp'
+                    },
+                    caption: 'Протатип сайт Модели 2',
+                    type: 'photo'
+                },
+            ]),
+            await ctx.replyWithMarkdown(
+                'Просмотри ещё *Альбомы*',
+                Markup.inlineKeyboard([
+                    [Markup.button.callback('Альбом 1', 'Albom_1'), Markup.button.callback('Альбом 3', 'Albom_3')]
+                ])
+            )
+    } catch (e) {
+        console.error(e)
+    }
+
+})
+
+// Albom 3
+bot.action('Albom_3', async (ctx) => {
+    try {
+        ctx.reply('Это Альбом 3')
+    }catch(e){
+        console.error(e)
+    }
 })
 
 
