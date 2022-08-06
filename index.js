@@ -120,7 +120,7 @@ _Вы там найдёте много интересного и полезно�
 
 ✋ [PoliWeb on GitHub](https://github.com/poliweb)
 
-`,{disable_web_page_preview: preview = false}),
+`,{disable_web_page_preview: false})
     await ctx.replyWithMediaGroup([
         {
             media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491161/Portfolio/slade_7_hfdov0.webp' },
@@ -143,10 +143,10 @@ _Вы там найдёте много интересного и полезно�
             type: 'photo'
         }
     ]),
-    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
+    await ctx.reply('Это <b>Моё супер портфолио!</b> Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
         {   parse_mode: 'HTML',
             ...Markup.inlineKeyboard([
-                [Markup.button.callback('Альбом 1', 'Albom_1'), Markup.button.callback('Альбом 2', 'Albom_2')],
+                [Markup.button.callback('Альбом 1', 'Albom_1'),  Markup.button.callback('Альбом 2', 'Albom_2')],
                 [Markup.button.callback('Альбом 3', 'Albom_3')]
             ])
         }
@@ -163,10 +163,7 @@ bot.action('Albom_1', async (ctx) => {
     try {
         await ctx.replyWithMarkdown(`
 Альбом 1 *Слайдер для сайта*
-Демо сайта: [My Mars Expedition](https://mymarsexpedition.netlify.app)
-        `,
-        {disable_web_page_preview: preview = true}
-        )
+        `)
         await ctx.replyWithMediaGroup([{
                     media: {
                         url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659487339/Portfolio/mars_3_pydzo2.webp'
@@ -196,6 +193,10 @@ bot.action('Albom_1', async (ctx) => {
                     type: 'photo'
                 },
             ]),
+            await ctx.replyWithMarkdown(`
+            Демо сайта: [My Mars Expedition](https://mymarsexpedition.netlify.app)
+            `,
+            {disable_web_page_preview: true}),
             await ctx.replyWithMarkdown(
                 `Просмотри ещё *Альбомы* `,
                 Markup.inlineKeyboard([
@@ -215,7 +216,7 @@ bot.action('Albom_2', async (ctx) => {
                     media: {
                         url: 'https://res.cloudinary.com/poliweb/image/upload/v1659786470/Portfolio/DevTo2_mivecv.webp'
                     },
-                    caption: 'Протатип сайт Модели 2',
+                    caption: 'Протатип сайт Dev To ',
                     type: 'photo'
                 },
                 {
@@ -239,8 +240,9 @@ bot.action('Albom_2', async (ctx) => {
                     caption: 'Протатип сайт Модели 1',
                     type: 'photo'
                 },
-            ]),
-            await ctx.replyWithHTML('<b>Демо сайта:</b> <a href="http://devto.poliweb.kz/">DevTo.poliweb.kz</a>', {disable_web_page_preview: preview= true})
+            ])
+            await ctx.replyWithHTML('<b>Демо сайта:</b> <a href="http://devto.poliweb.kz/">DevTo.poliweb.kz</a>', 
+            {disable_web_page_preview: true})
             await ctx.replyWithMarkdown(
                 'Просмотри ещё *Альбомы*',
                 Markup.inlineKeyboard([
@@ -256,7 +258,47 @@ bot.action('Albom_2', async (ctx) => {
 // Albom 3
 bot.action('Albom_3', async (ctx) => {
     try {
-        ctx.reply('Это Альбом 3')
+        await ctx.replyWithMarkdown(`
+Альбом 3 
+_Cайт:_ *Fashion Models*`)
+        await ctx.replyWithMediaGroup([
+            {
+                media: {
+                    url: 'https://res.cloudinary.com/poliweb/image/upload/v1659785725/Portfolio/pw-model-agency4_short_hbboqp.webp'
+                },
+                caption: 'Протатип сайт Fashion Models 1',
+                type: 'photo'
+            },
+            {
+                media: {
+                    url: 'https://res.cloudinary.com/poliweb/image/upload/v1659785576/Portfolio/pw-model-agency1_short_f7ztqy.webp'
+                },
+                caption: 'Протатип сайт Fashion Models 2',
+                type: 'photo'
+            },
+            {
+                media: {
+                    url: 'https://res.cloudinary.com/poliweb/image/upload/v1659785575/Portfolio/pw-model-agency2_short_jiljzs.webp'
+                },
+                caption: 'Протатип сайт Fashion Models 3',
+                type: 'photo'
+            },
+            {
+                media: {
+                    url: 'https://res.cloudinary.com/poliweb/image/upload/v1659785572/Portfolio/pw-model-agency3_short_zabms5.webp'
+                },
+                caption: 'Протатип сайт Fashion Models 4',
+                type: 'photo'
+            },
+        ])
+        await ctx.replyWithHTML('<b>Демо сайта:</b> <a href="https://pw-model-agency.netlify.app/">Fashion Models</a>', 
+            {disable_web_page_preview: true})
+            await ctx.replyWithMarkdown(
+                'Просмотри ещё *Альбомы*',
+                Markup.inlineKeyboard([
+                    [Markup.button.callback('Альбом 1', 'Albom_1'), Markup.button.callback('Альбом 2', 'Albom_2')]
+                ])
+            )
     }catch(e){
         console.error(e)
     }
