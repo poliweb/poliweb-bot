@@ -24,9 +24,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
  * Commands for bot
  */
 
-// console.log(Markup.inlineKeyboard)
-// console.log(Telegraf)
-
 /**
  * Command Start
  */
@@ -146,7 +143,7 @@ _Вы там найдёте много интересного и полезно�
             type: 'photo'
         }
     ]),
-    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
+    await ctx.reply('Это <b>Моё</b>супер портфолио! Просмотри дополнительные <br> Альбом 1, Альбом 2 и Альбом 3',
         {   parse_mode: 'HTML',
             ...Markup.inlineKeyboard([
                 [Markup.button.callback('Альбом 1', 'Albom_1'), Markup.button.callback('Альбом 2', 'Albom_2')],
