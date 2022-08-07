@@ -78,7 +78,20 @@ await ctx.reply(helpText.commands),
  * Command Contact
  */
 bot.command('contact', (ctx) => {
-    return ctx.reply('Это contact')
+    ctx.replyWithHTML(`
+<b>Контакты для связи</b>
+
+<i>Звяжитесь прямо сейчас по телефону!</i>
+
+📞 <i>Tel:</i> <a href="tel:+77017211284">+7 701 721 1284</a>
+
+📩 <i>Email:</i> <a href="mailto:web@poliweb.su&body=Привет?subject=Вопрос с телеграм чат-бота">web@poliweb.su</a>
+
+🔗 <i>Сайт:</i> <a href="https://poliweb.su/">PoliWeb.SU</a>
+
+
+🌐 Alma-Ata, Kazakhstan, KZ
+    `)
 })
 
 /**
@@ -152,7 +165,6 @@ _Вы там найдёте много интересного и полезно�
         }
         )
 })
-
 
 /**
  * Action
