@@ -30,6 +30,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 
  bot.start(async (ctx) => {
     return [
+        await ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659345878/PoliWebStartUpScvear_ax3px5.webp'}, 
+        {caption: 'Логотип PoliWeb и илюстрация SVG - формат'}),
         await ctx.replyWithHTML(`
 <b>✋ Привет, ${ctx.message.from.first_name ? ctx.message.from.first_name : 'Незнакомец'}!</b>
 <i>Жми на меню возле строки для вода текста и получи информацию о PoliWeb Developer</i>
@@ -53,9 +55,7 @@ bot.start(async (ctx) => {
     ]
 })
 </code>
-    `),
-    await ctx.replyWithPhoto({url: 'https://res.cloudinary.com/poliweb/image/upload/v1659345878/PoliWebStartUpScvear_ax3px5.webp'}, 
-    {caption: 'Логотип PoliWeb и илюстрация SVG - формат'}),
+    `)
 ]
 })
 
@@ -83,7 +83,7 @@ bot.command('contact', (ctx) => {
 
 <i>Звяжитесь прямо сейчас по телефону!</i>
 
-📞 <i>Tel:</i> +77017211284
+📞 <i>Tel:</i> +7 701 721 1284
 
 📩 <i>Email:</i> <a href="mailto:web@poliweb.su&body=Привет?subject=Вопрос с телеграм чат-бота">web@poliweb.su</a>
 
@@ -318,17 +318,29 @@ _Cайт:_ *Fashion Models*`)
 
 
 /**
- * Test Code
+ * Hears Code
  */
-//  bot.command('pyramid', (ctx) => {
-//     return ctx.reply(
-//       'Keyboard wrap',
-//       Markup.keyboard(['one', 'two', 'three', 'four', 'five', 'six', 'Albom_1'], {
-//         wrap: (btn, index, currentRow) => currentRow.length >= (index + 1) / 3
-//       })
-//     )
-//   })
-  
+ bot.hears(['hi', 'HI', 'Hi'], async (ctx) => {
+    return [
+        await ctx.replyWithSticker('https://res.cloudinary.com/poliweb/image/upload/v1659935059/WebsiteCreator-amico_mzylur.webp'),
+        await ctx.replyWithMarkdown(`
+*Hi, ${ctx.message.from.first_name ? ctx.message.from.first_name : 'Незнакомец'}! I am PoliWeb Chatbot.*
+Do you want to know who author is Chatbot?
+Click here → /about
+    `)
+    ]
+})
+
+bot.hears(['привет', 'ПРИВЕТ', 'Привет'], async (ctx) => {
+    return [
+        await ctx.replyWithSticker('https://res.cloudinary.com/poliweb/image/upload/v1659935059/WebsiteCreator-amico_mzylur.webp'),
+        await ctx.replyWithMarkdown(`
+*Привет, ${ctx.message.from.first_name ? ctx.message.from.first_name : 'Незнакомец'}! Я чат-бот PoliWeb.*
+Хотите узнать, кто автор чат-бота?
+Жми сюда → /about
+    `)
+    ]
+})
 
 /**
  * Start bot
