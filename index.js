@@ -121,7 +121,8 @@ _Моя философия - обучение на протяжении всей
  * Command Portfolio
  */
  bot.command('portfolio', async (ctx) => {
-    await ctx.replyWithMarkdown(`
+    try{
+        await ctx.replyWithMarkdown(`
 *📸  Это моё портфолио*
 
 В портфолио подобраны графические фрагменты сайтов.
@@ -133,37 +134,41 @@ _Вы там найдёте много интересного и полезно�
 
 ✋ [PoliWeb on GitHub](https://github.com/poliweb)
 
-`,{disable_web_page_preview: false})
-    await ctx.replyWithMediaGroup([
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491161/Portfolio/slade_7_hfdov0.webp' },
-            caption: 'Слайд 1',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_5_t8yznw.webp' },
-            caption: 'Слайд 2',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491298/Portfolio/slade_8_zjghsg.webp' },
-            caption: 'Слайд 3',
-            type: 'photo'
-        },
-        {
-            media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_6_n8yjbh.webp' },
-            caption: 'Слайд 4',
-            type: 'photo'
-        }
-    ]),
-    await ctx.reply('Это <b>Моё супер портфолио!</b> Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
-        {   parse_mode: 'HTML',
-            ...Markup.inlineKeyboard([
-                [Markup.button.callback('Альбом 1', 'Albom_1'),  Markup.button.callback('Альбом 2', 'Albom_2')],
-                [Markup.button.callback('Альбом 3', 'Albom_3')]
-            ])
-        }
-        )
+        `,{disable_web_page_preview: false})
+            await ctx.replyWithMediaGroup([
+                {
+                    media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491161/Portfolio/slade_7_hfdov0.webp' },
+                    caption: 'Слайд 1',
+                    type: 'photo'
+                },
+                {
+                    media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_5_t8yznw.webp' },
+                    caption: 'Слайд 2',
+                    type: 'photo'
+                },
+                {
+                    media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491298/Portfolio/slade_8_zjghsg.webp' },
+                    caption: 'Слайд 3',
+                    type: 'photo'
+                },
+                {
+                    media: { url: 'https://res.cloudinary.com/poliweb/image/upload/c_scale,w_1000/v1659491158/Portfolio/slade_6_n8yjbh.webp' },
+                    caption: 'Слайд 4',
+                    type: 'photo'
+                }
+            ]),
+            await ctx.reply('Это <b>Моё супер портфолио!</b> Просмотри дополнительные Альбом 1, Альбом 2 и Альбом 3',
+                {   parse_mode: 'HTML',
+                    ...Markup.inlineKeyboard([
+                        [Markup.button.callback('Альбом 1', 'Albom_1'),  Markup.button.callback('Альбом 2', 'Albom_2')],
+                        [Markup.button.callback('Альбом 3', 'Albom_3')]
+                    ])
+                }
+                )
+    } catch (e) {
+        console.error(e)
+    }
+
 })
 
 /**
@@ -173,6 +178,7 @@ _Вы там найдёте много интересного и полезно�
 //  Albom 1
 bot.action('Albom_1', async (ctx) => {
     try {
+        await ctx.answerCbQuery()
         await ctx.replyWithMarkdown(`
 Альбом 1 *Слайдер для сайта*
         `)
@@ -223,6 +229,7 @@ bot.action('Albom_1', async (ctx) => {
 //Albom 2
 bot.action('Albom_2', async (ctx) => {
     try {
+        await ctx.answerCbQuery()
         await ctx.replyWithMarkdown(`Альбом 2 *Протатип сайта*`)
         await ctx.replyWithMediaGroup([{
                     media: {
@@ -270,6 +277,7 @@ bot.action('Albom_2', async (ctx) => {
 // Albom 3
 bot.action('Albom_3', async (ctx) => {
     try {
+        await ctx.answerCbQuery()
         await ctx.replyWithMarkdown(`
 Альбом 3 
 _Cайт:_ *Fashion Models*`)
