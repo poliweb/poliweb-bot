@@ -7,15 +7,17 @@ const helpText = require('./const')
 /**
  * Подключение токина
  */
-const BOT_TOKEN = process.env.BOT_TOKEN
+const {BOT_TOKEN, URL} = process.env
 if(BOT_TOKEN === undefined) {
     throw new Error('BOT_TOKEN must be provided! BOT_TOKEN должен быть предоставлен!')
 }
 
+const PORT = process.env.PORT || 5000
+
 /**
  * Authorizing bot - авторизация бота
  */
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf(BOT_TOKEN)
 
 // bot.use(Telegraf.log())
 
@@ -354,14 +356,19 @@ bot.hears(['привет', 'ПРИВЕТ', 'Привет'], async (ctx) => {
  * Start bot
  * Бот обрабатывает пакет обновлений
  */
-bot.launch().then((res) => {
-    console.log('BOT_TOKEN: OK 👍')
-    console.log('Run Bot. Бот запушен и работает 👍')
-}).catch((err) => {
-    console.log('Опс!!! Ошибка!!! ', err)
-})
+// bot.launch().then((res) => {
+//     console.log('BOT_TOKEN: OK 👍')
+//     console.log('Run Bot. Бот запушен и работает 👍')
+// }).catch((err) => {
+//     console.log('Опс!!! Ошибка!!! ', err)
+// })
 
+
+bot.launch({ webhook: { domain: URL, port: PORT } })
+console.log('Run Bot. Бот запушен и работает 👍')
 
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+
