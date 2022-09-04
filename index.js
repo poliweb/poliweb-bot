@@ -368,7 +368,7 @@ bot.launch({ webhook: { domain: URL, port: PORT } })
 console.log('Run Bot. Бот запушен и работает 👍')
 
 // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+// process.once('SIGINT', () => bot.stop('SIGINT'))
+// process.once('SIGTERM', () => bot.stop('SIGTERM'))
 
 
