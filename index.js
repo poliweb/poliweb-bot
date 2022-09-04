@@ -352,6 +352,10 @@ bot.hears(['привет', 'ПРИВЕТ', 'Привет'], async (ctx) => {
     ]
 })
 
+bot.command('server', (ctx) => {
+    ctx.reply(`ENV is ${process.env.NODE_ENV}`)
+})
+
 /**
  * Start bot
  * Бот обрабатывает пакет обновлений
