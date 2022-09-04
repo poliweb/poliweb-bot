@@ -19,6 +19,8 @@ const PORT = process.env.PORT || 5000
  */
 const bot = new Telegraf(BOT_TOKEN)
 
+console.log(process.env.NODE_ENV)
+
 // bot.use(Telegraf.log())
 
 
