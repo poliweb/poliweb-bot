@@ -356,16 +356,19 @@ bot.hears(['привет', 'ПРИВЕТ', 'Привет'], async (ctx) => {
  * Start bot
  * Бот обрабатывает пакет обновлений
  */
-// bot.launch().then((res) => {
-//     console.log('BOT_TOKEN: OK 👍')
-//     console.log('Run Bot. Бот запушен и работает 👍')
-// }).catch((err) => {
-//     console.log('Опс!!! Ошибка!!! ', err)
-// })
 
+if(process.env.NODE_ENV === 'production'){
+    bot.launch({ webhook: { domain: URL, port: PORT } })
+    console.log('Run Bot. Бот запушен и работает 👍')
+}else {
+    bot.launch().then((res) => {
+        console.log('BOT_TOKEN: OK 👍')
+        console.log('Run Bot. Бот запушен и работает 👍')
+    }).catch((err) => {
+        console.log('Опс!!! Ошибка!!! ', err)
+    })
+}
 
-bot.launch({ webhook: { domain: URL, port: PORT } })
-console.log('Run Bot. Бот запушен и работает 👍')
 
 // Enable graceful stop
 // process.once('SIGINT', () => bot.stop('SIGINT'))
